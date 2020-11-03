@@ -1,0 +1,56 @@
+<resources>
+    <!-- Title for the application. [CHAR LIMIT=12] -->
+    <string name="app_name">Covid19</string>
+
+    <!-- Category name for phrases [CHAR LIMIT=20] -->
+    <string name="category_world">World Stats</string>
+
+    <!-- Category name for the vocabulary words for colors [CHAR LIMIT=20] -->
+    <string name="category_india">India Stats</string>
+
+    <!-- Category name for the vocabulary words for numbers [CHAR LIMIT=20] -->
+    <string name="category_states">View stats by states</string>
+
+    <!-- Category name for the vocabulary words for family members [CHAR LIMIT=20] -->
+    <string name="category_districts">View stats by districts</string>
+
+    <string-array name="states_array">
+        <item>Andaman and Nicobar Islands</item>
+        <item>Andhra Pradesh</item>
+        <item>Arunachal Pradesh</item>
+        <item>Assam</item>
+        <item>Bihar</item>
+        <item>Chandigarh</item>
+        <item>Chhattisgarh</item>
+        <item>Delhi</item>
+        <item>Dadra and Nagar Haveli and Daman and Diu</item>
+        <item>Goa</item>
+        <item>Gujarat</item>
+        <item>Himachal Pradesh</item>
+        <item>Haryana</item>
+        <item>Jharkhand</item>
+        <item>Jammu and Kashmir</item>
+        <item>Karnataka</item>
+        <item>Kerala</item>
+        <item>Ladakh</item>
+        <item>Maharashtra</item>
+        <item>Meghalaya</item>
+        <item>Manipur</item>
+        <item>Madhya Pradesh</item>
+        <item>Mizoram</item>
+        <item>Nagaland</item>
+        <item>Odisha</item>
+        <item>Punjab</item>
+        <item>Puducherry</item>
+        <item>Rajasthan</item>
+        <item>Sikkim</item>
+        <item>Telangana</item>
+        <item>Tamil Nadu</item>
+        <item>Tripura</item>
+        <item>Total</item>
+        <item>Uttar Pradesh</item>
+        <item>Uttarakhand</item>
+        <item>West Bengal</item>
+    </string-array>
+
+</resources>
