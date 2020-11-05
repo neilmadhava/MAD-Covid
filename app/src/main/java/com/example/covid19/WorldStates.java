@@ -4,8 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -17,6 +21,7 @@ import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -26,6 +31,7 @@ import java.util.Calendar;
 public class WorldStates extends AppCompatActivity {
 
     private Spinner spinner;
+    private String url;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,36 +39,91 @@ public class WorldStates extends AppCompatActivity {
         setContentView(R.layout.activity_world_states);
 
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = "https://covid19-api.com/help/countries?format=json";
 
         spinner = (Spinner)findViewById(R.id.spinner2);
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.country_array, android.R.layout.simple_spinner_item);
+        // Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Apply the adapter to the spinner
+        spinner.setAdapter(adapter);
 
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        Log.i("response", response);
-                        try {
-                            JSONArray arr = new JSONArray(response);
-                            ArrayList<String> names = new ArrayList<String>();
-                            for (int i = 0; i < arr.length(); i++) {
-                                names.add(arr.getJSONObject(i).getString("name"));
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int pos, long l) {
+                url = "https://covid19.mathdro.id/api/countries/" +  parent.getItemAtPosition(pos).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+
+
+        Button getbtn = (Button)findViewById(R.id.button2);
+        getbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                TextView msg = (TextView)findViewById(R.id.msg);
+                msg.setText("Loading...");
+                RequestQueue queue = Volley.newRequestQueue(WorldStates.this);
+                StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                JSONObject object = null;
+                                try {
+                                    object = new JSONObject(response);
+                                }
+                                catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+
+                                try {
+                                    TextView confirm = (TextView)findViewById(R.id.confirm);
+                                    confirm.setText(object.getJSONObject("confirmed").get("value").toString());
+                                }
+                                catch (Exception e){
+                                    e.printStackTrace();
+                                }
+
+                                try {
+                                    TextView confirm = (TextView)findViewById(R.id.recover);
+                                    confirm.setText(object.getJSONObject("recovered").get("value").toString());
+                                }
+                                catch (Exception e){
+                                    e.printStackTrace();
+                                }
+
+                                try {
+                                    TextView confirm = (TextView)findViewById(R.id.death);
+                                    confirm.setText(object.getJSONObject("deaths").get("value").toString());
+                                }
+                                catch (Exception e){
+                                    e.printStackTrace();
+                                }
+
+                                TextView msg = (TextView) findViewById(R.id.msg);
+                                msg.setText("Success!");
+
+
                             }
-                            ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(WorldStates.this, android.R.layout.simple_spinner_item, names);
-                            spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); // The drop down view
-                            spinner.setAdapter(spinnerArrayAdapter);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
+                        }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                        Log.i("Error", "An error occurred" + error);
+                        TextView msg = (TextView) findViewById(R.id.msg);
+                        msg.setText("Error");
                     }
                 });
 
+                // Add the request to the RequestQueue.
+                queue.add(stringRequest);
+            }
+        });
 
     }
 }

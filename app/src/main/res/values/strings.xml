@@ -52,5 +52,41 @@
         <item>Uttarakhand</item>
         <item>West Bengal</item>
     </string-array>
+    <string-array name="country_array">
+        <item>Australia</item>
+        <item>Austria</item>
+        <item>Bahamas</item>
+        <item>Bangladesh</item>
+        <item>Belarus</item>
+        <item>Belgium</item>
+        <item>Bhutan</item>
+        <item>Brazil</item>
+        <item>Cambodia</item>
+        <item>Canada</item>
+        <item>China</item>
+        <item>Denmark</item>
+        <item>Egypt</item>
+        <item>Ethiopia</item>
+        <item>Fiji</item>
+        <item>France</item>
+        <item>Germany</item>
+        <item>Ghana</item>
+        <item>Guatemala</item>
+        <item>Japan</item>
+        <item>Kenya</item>
+        <item>Malaysia</item>
+        <item>Mexico</item>
+        <item>Myanmar</item>
+        <item>Nepal</item>
+        <item>Netherlands</item>
+        <item>Pakistan</item>
+        <item>Portugal</item>
+        <item>Russia</item>
+        <item>Spain</item>
+        <item>Sweden</item>
+        <item>Switzerland</item>
+        <item>UAE</item>
+        <item>USA</item>
+    </string-array>
 
 </resources>
